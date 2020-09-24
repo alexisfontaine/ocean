@@ -1,0 +1,11 @@
+.example {
+	display: grid;
+	grid-gap: var(--padding) var(--margin);
+	justify-content: center;
+	justify-items: center;
+	align-items: center;
+	margin-bottom: var(--margin);
+}
+
+
+@import '../list/story';

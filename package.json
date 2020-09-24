@@ -1,0 +1,29 @@
+{
+	"author": "Alexis Fontaine",
+	"name": "ocean",
+	"version": "0.1.0",
+	"license": "MIT",
+	"scripts": {
+		"start": "NODE_ENV=development node build.js",
+		"build": "NODE_ENV=production node build.js",
+		"debug": "NODE_ENV=development node --nolazy --inspect-brk=9229 build.js"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"autoprefixer": "^9.8.6",
+		"chokidar": "^3.4.2",
+		"parcel-bundler": "^1.12.4",
+		"parcel-plugin-static-files-copy": "^2.5.0",
+		"sass": "^1.26.11"
+	},
+	"staticFiles": {
+		"staticPath": [
+			"./assets"
+		],
+		"watcherGlob": "**"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions"
+	]
+}

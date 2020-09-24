@@ -1,0 +1,101 @@
+.code, [class^='code--'] {
+	display: inline-block;
+	tab-size: 4;
+	background-color: var(--color-background-sheet);
+	border-radius: var(--border-radius);
+
+	a &, button & {
+		color: var(--color-foreground);
+	}
+}
+
+.code {
+	width: 100%;
+	max-height: 60vh;
+	padding: var(--padding);
+	overflow: auto;
+}
+
+.code--inline {
+	--spacing: calc(2 * var(--border-radius));
+
+	padding-right: var(--spacing);
+	padding-left: var(--spacing);
+}
+
+.comment {
+ color: #75715e;
+}
+.string {
+ color: #e6db74;
+}
+.constant.numeric {
+ color: #ae81ff;
+}
+.constant.language {
+ color: #ae81ff;
+}
+.constant.character {
+ color: #ae81ff;
+}
+.constant.other {
+ color: #ae81ff;
+}
+.variable {
+}
+.keyword {
+ color: #f92672;
+}
+.storage {
+ color: #f92672;
+}
+.storage.type {
+ color: #66d9ef;
+font-style: italic;
+}
+.entity.name.class {
+ color: #a6e22e;
+font-style: underline;
+}
+.entity.other.inherited-class {
+ color: #a6e22e;
+font-style: underline;
+font-style: italic;
+}
+.entity.name.function {
+ color: #a6e22e;
+}
+.variable.parameter {
+ color: #fd971f;
+font-style: italic;
+}
+.entity.name.tag {
+ color: #f92672;
+}
+.entity.other.attribute-name {
+ color: #a6e22e;
+}
+.support.function {
+ color: #66d9ef;
+}
+.support.constant {
+ color: #66d9ef;
+}
+.support.type {
+ color: #66d9ef;
+font-style: italic;
+}
+.support.class {
+ color: #66d9ef;
+font-style: italic;
+}
+.support.other.variable {
+}
+.invalid {
+ color: #f8f8f0;
+ background-color: #f92672;
+}
+.invalid.deprecated {
+ color: #f8f8f0;
+ background-color: #ae81ff;
+}

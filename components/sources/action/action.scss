@@ -1,0 +1,112 @@
+%outline {
+	--active-foreground: #a6accd;
+	--hover-foreground: #fff;
+
+	background-color: unset;
+	color: var(--active-foreground);
+
+	&:focus {
+		color: var(--focus-foreground);
+	}
+}
+
+%solid {
+	--active-foreground: #eee;
+	--hover-foreground: #fff;
+
+	color: var(--active-foreground);
+
+	&:focus {
+		--border-color: var(--outline-color);
+
+		color: var(--hover-foreground);
+	}
+
+	&.loading {
+		background-color: var(--active-background);
+	}
+}
+
+.button {
+	@extend %outline;
+
+	--active-background: var(--color-ghost-active);
+	--border-color: var(--color-ghost);
+	--focus-foreground: #fff;
+	--hover-background: var(--color-ghost-hover);
+}
+
+.button--danger {
+	@extend %outline;
+
+	--active-background: var(--color-danger-active);
+	--border-color: var(--color-danger);
+	--focus-foreground: var(--color-danger);
+	--hover-background: var(--color-danger-hover);
+}
+
+.button--primary {
+	@extend %solid;
+
+	--active-background: var(--color-primary-active);
+	--hover-background: var(--color-primary-hover);
+	--outline-color: var(--color-primary-outline);
+
+	background-color: var(--color-primary);
+}
+
+.button--secondary {
+	@extend %solid;
+
+	--active-background: var(--color-secondary-active);
+	--hover-background: var(--color-secondary-hover);
+	--outline-color: var(--color-secondary-outline);
+
+	background-color: var(--color-secondary);
+}
+
+.button, [class^='button--'] {
+	@extend %anchor, %loading;
+
+	min-width: var(--margin);
+	padding: var(--padding-inline) var(--padding);
+	border-radius: var(--border-radius);
+	border: none;
+	font-family: unset;
+	font-size: unset;
+	line-height: unset;
+	box-shadow: inset 0 0 0 var(--border) var(--border-color);
+	user-select: none;
+	transition: background-color .2s, box-shadow .2s, color .2s;
+
+	&:focus {
+		--border: var(--border-focus);
+	}
+
+	&:hover {
+		--border-color: var(--hover-background);
+
+		background-color: var(--hover-background);
+		color: var(--hover-foreground);
+	}
+
+	&:active {
+		--border-color: var(--active-background);
+
+		background-color: var(--active-background);
+		color: var(--active-foreground);
+	}
+
+	&.disabled {
+		--border-color: #0000;
+
+		background-color: unset;
+		color: var(--color-foreground-disabled);
+	}
+
+	> span {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+}

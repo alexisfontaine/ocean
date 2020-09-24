@@ -1,0 +1,22 @@
+.list {
+	display: grid;
+	align-content: start;
+
+	> * {
+		padding: var(--padding-inline) var(--padding);
+		border-left: 4px solid #0000;
+		transition: background-color .2s, border-color .2s, color .2s;
+
+		&.active {
+			color: #fff;
+			background-color: var(--color-background-element);
+			border-color: var(--color-primary);
+		}
+	}
+
+	> a, > button {
+		&.active:hover {
+			border-color: var(--color-primary-hover);
+		}
+	}
+}

@@ -1,0 +1,15 @@
+[package]
+name = "ocean-macro"
+version = "0.1.0"
+authors = ["Alexis Fontaine <alexis.fontaine@outlook.com>"]
+edition = "2018"
+description = "An experimental design system made with Rust front-end framework Yew"
+
+[lib]
+path = "main.rs"
+proc-macro = true
+
+[dependencies]
+quote = "1"
+syn = "1"
+syntect = { version = "4", default-features = false, features = ["assets", "dump-load", "html", "parsing", "regex-fancy"] }

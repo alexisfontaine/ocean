@@ -1,0 +1,116 @@
+@use '../components/sources/main';
+@use '../components/sources/code/code';
+@use '../components/sources/story/story';
+
+
+@import 'hero';
+@import 'icon';
+
+
+body {
+	display: grid;
+	grid-template-columns: 25rem 1fr;
+	grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
+	width: 100vw;
+	overflow-x: hidden;
+
+	> header {
+		grid-area: 1 / 1 / 1 / -1;
+	}
+
+	> main, > footer {
+		grid-column-start: 1;
+		grid-column-end: -1;
+	}
+
+	> nav, > aside {
+		grid-area: 2 / 1 / -1;
+		position: sticky;
+		top: 0;
+		max-height: 100vh;
+		overflow-y: auto;
+
+		~ main, ~ footer {
+			grid-column-start: 2;
+		}
+	}
+}
+
+.application__header, .application__footer {
+	height: calc(var(--margin) + var(--padding));
+}
+
+.application__header {
+	--icon-size: 3rem;
+	--logo-size: var(--icon-size);
+	--spacing: calc(var(--margin) - var(--padding-inline));
+
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	grid-column-gap: calc(2 * var(--spacing));
+	align-items: center;
+	padding-right: var(--spacing);
+	padding-left: var(--spacing);
+	background-color: #000;
+	transition: all .2s;
+
+	&::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		max-width: 120rem;
+		background-image: url('../assets/images/back.svg');
+		background-repeat: no-repeat;
+		background-position: bottom right;
+		z-index: -1;
+		transition: opacity .2s;
+	}
+
+	&[data-translucent='true'] {
+		background-color: #090b1000;
+	}
+
+	&:not([data-translucent='true'])::before {
+		opacity: 0;
+	}
+
+	&[data-stretched='true'] {
+		--logo-size: var(--margin);
+
+		height: calc(2 * var(--margin) + var(--padding));
+	}
+
+	nav {
+		display: grid;
+		grid-auto-flow: column;
+		grid-column-gap: calc(var(--margin) - 2 * var(--padding-inline));
+		justify-content: center;
+	}
+
+	.anchor {
+		padding: var(--padding-inline);
+	}
+}
+
+.application__logo {
+	height: var(--logo-size);
+	transition: height .2s;
+}
+
+.application__footer {
+	color: #4B526D;
+	margin-top: 0;
+
+	> nav {
+		padding-top: var(--margin);
+		border-top: 1px solid #3B3F5150;
+	}
+}
+
+.application__sidebar {
+	background-color: #090b10;
+}

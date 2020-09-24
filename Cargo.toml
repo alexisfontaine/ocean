@@ -1,0 +1,25 @@
+[package]
+name = "ocean-public"
+version = "0.1.0"
+authors = ["Alexis Fontaine <alexis.fontaine@outlook.com>"]
+edition = "2018"
+description = "An experimental design system made with Rust front-end framework Yew"
+
+[lib]
+crate-type = ["cdylib"]
+path = "sources/lib.rs"
+
+[dependencies]
+ocean = { path = "components", features = ["router", "story"] }
+wasm-bindgen = "0.2"
+web-sys = { version = "0.3", features = ["ScrollBehavior", "ScrollToOptions"] }
+yew = "0.17"
+yew-router = { version = "0.14", default-features = false, features = ["agent", "web_sys"] }
+wee_alloc = { version = "0.4", optional = true }
+
+[workspace]
+members = ["components", "components/macro"]
+
+[profile.release]
+codegen-units = 1
+lto = true

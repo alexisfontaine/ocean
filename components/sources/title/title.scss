@@ -1,0 +1,39 @@
+.title, [class^='title--'] {
+	margin-top: 0;
+	margin-bottom: var(--padding);
+	font-size: var(--size);
+	font-weight: var(--weight);
+}
+
+%title--main {
+	--size: 5rem;
+	--weight: 400;
+
+	color: #fff;
+}
+
+.title {
+	@extend %title--main;
+}
+
+.title--headline {
+	@extend %title--main;
+
+	--size: 6rem;
+
+	letter-spacing: -1px;
+}
+
+.title--section {
+	--size: 3rem;
+	--weight: 400;
+
+	color: #a6accd;
+}
+
+.title--sub-section {
+	--size: 2rem;
+	--weight: 700;
+
+	color: #5e668a;
+}

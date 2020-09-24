@@ -1,0 +1,23 @@
+.stack {
+	--spacing: var(--margin);
+	--size: 120rem;
+
+	display: grid;
+	grid-template-columns: minmax(5vw, 1fr) minmax(0, var(--size)) minmax(5vw, 1fr);
+	grid-row-gap: calc(2 * var(--spacing));
+	align-content: start;
+	margin-top: var(--spacing);
+	margin-bottom: var(--spacing);
+
+	&.stretched {
+		--spacing: 16vh;
+	}
+
+	> * {
+		grid-column: 2;
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+	}
+}

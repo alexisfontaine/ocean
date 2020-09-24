@@ -1,0 +1,57 @@
+%anchor {
+	position: relative;
+	display: inline-grid;
+	grid-auto-flow: column;
+	grid-column-gap: var(--padding-inline);
+	align-items: center;
+	text-decoration: none;
+	outline: none;
+}
+
+.anchor {
+	@extend %loading;
+
+	--border-color: var(--color-ghost-hover);
+
+	user-select: none;
+	transition: color .2s;
+
+	&:hover, &:focus {
+		color: #fff;
+	}
+
+	&:active {
+		color: inherit;
+	}
+}
+
+.anchor--inline {
+	--border-color: var(--color-primary);
+
+	box-shadow: inset 0 calc(0px - var(--border)) 0 0 var(--border-color);
+	transition: box-shadow .2s, color .2s;
+
+	&:hover, &:focus {
+		--border: var(--border-focus);
+
+		color: #fff;
+	}
+
+	&:active {
+		--border-color: var(--color-primary-active);
+
+		color: inherit;
+	}
+}
+
+.anchor, [class^='anchor--'] {
+	@extend %anchor;
+
+	color: inherit;
+
+	&.disabled {
+		--border-color: #0000;
+
+		color: var(--color-foreground-disabled);
+	}
+}
