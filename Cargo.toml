@@ -3,7 +3,7 @@ name = "ocean-public"
 version = "0.1.0"
 authors = ["Alexis Fontaine <alexis.fontaine@outlook.com>"]
 edition = "2018"
-description = "An experimental design system made with Rust front-end framework Yew"
+description = "An experimental design system made for fun with Rust front-end framework Yew"
 
 [lib]
 crate-type = ["cdylib"]
@@ -18,7 +18,7 @@ yew-router = { version = "0.14", default-features = false, features = ["agent", 
 wee_alloc = { version = "0.4", optional = true }
 
 [workspace]
-members = ["components", "components/macro"]
+members = ["components", "macro"]
 
 [profile.release]
 codegen-units = 1

@@ -1,11 +1,13 @@
+@import '../main';
+@import '../code/code';
+@import '../list/story';
+
+
 .example {
 	display: grid;
 	grid-gap: var(--padding) var(--margin);
 	justify-content: center;
 	justify-items: center;
-	align-items: center;
+	align-items: flex-start;
 	margin-bottom: var(--margin);
 }
-
-
-@import '../list/story';

@@ -34,7 +34,16 @@ pub struct Properties {
 	pub autofocus: bool,
 
 	#[prop_or_default]
+	pub class: String,
+
+	#[prop_or_default]
+	pub details: String,
+
+	#[prop_or_default]
 	pub disabled: bool,
+
+	#[prop_or_default]
+	pub error: bool,
 
 	#[prop_or(Kind::Text)]
 	pub kind: Kind,
@@ -80,6 +89,9 @@ impl Component for Field {
 	fn update (&mut self, message: Self::Message) -> ShouldRender {
 		match message {
 			Self::Message::Update(value) => {
+				if value == self.value
+					{ return false }
+
 				self.value = value.clone();
 				self.properties.oninput.emit(value);
 			}
@@ -90,13 +102,23 @@ impl Component for Field {
 
 	fn view (&self) -> Html {
 		let properties = &self.properties;
+		let mut class = properties.class.clone();
+		let details = &properties.details;
+
+		if class.is_empty()
+			{ class.push_str("field"); }
+
+		if properties.error
+			{ class.push_str(" error"); }
 
 		html! {
 			// `<fieldset>` has a bug on Chrome that prevents it from using `flex` or `grid` layout.
-			<div class="field">
+			<div class=class>
 				<input autofocus=properties.autofocus disabled=properties.disabled id=&self.identifier oninput=&self.handle_input type=properties.kind.value() ref=self.input.clone() />
 
 				<label for=&self.identifier>{&properties.label}</label>
+
+				{for if details.is_empty() { None } else { Some(html!(<span>{details}</span>)) }}
 			</div>
 		}
 	}

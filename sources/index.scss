@@ -1,7 +1,4 @@
-@use '../components/sources/main';
-@use '../components/sources/code/code';
-@use '../components/sources/story/story';
-
+@import '../components/story/story';
 
 @import 'hero';
 @import 'icon';
