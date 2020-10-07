@@ -14,7 +14,7 @@ pub struct Stack {
 	#[prop_or_default]
 	pub class: String,
 
-	#[prop_or_else(|| "section".into())]
+	#[prop_or("section".into())]
 	pub tag: String,
 }
 

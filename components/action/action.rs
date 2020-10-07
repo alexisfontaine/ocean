@@ -35,7 +35,7 @@ pub struct Action {
 	#[prop_or_default]
 	pub loading: bool,
 
-	#[prop_or_else(|| DEFAULT_HANDLER.with(|handler| (*handler).clone()))]
+	#[prop_or(DEFAULT_HANDLER.with(|handler| (*handler).clone()))]
 	pub onclick: Callback<MouseEvent>,
 }
 

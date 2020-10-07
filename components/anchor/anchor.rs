@@ -92,9 +92,9 @@ pub fn render (to: &str, kind: Kind, mut class: String, handle_click: Option<&Ca
 		if open_in_new_context
 			{ html!(<a class=class href=to onclick=handle_click rel="noopener" target="_blank">{children}</a>) } else
 			{ html!(<a class=class href=to onclick=handle_click>{children}</a>) }
+	} else if open_in_new_context {
+		html!(<a class=class href=to rel="noopener" target="_blank">{children}</a>)
 	} else {
-		if open_in_new_context
-			{ html!(<a class=class href=to rel="noopener" target="_blank">{children}</a>) } else
-			{ html!(<a class=class href=to>{children}</a>) }
+		html!(<a class=class href=to>{children}</a>)
 	}
 }

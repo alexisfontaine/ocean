@@ -50,7 +50,7 @@ pub struct Properties {
 
 	pub label: String,
 
-	#[prop_or_else(|| DEFAULT_HANDLER.with(|handler| (*handler).clone()))]
+	#[prop_or(DEFAULT_HANDLER.with(|handler| (*handler).clone()))]
 	pub oninput: Callback<String>
 }
 

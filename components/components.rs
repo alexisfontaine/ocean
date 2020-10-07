@@ -17,4 +17,4 @@ pub use stack::Stack;
 pub use title::Title;
 
 #[cfg(feature = "code")]
-pub use code::Code;
+pub use code::{highlight, highlight_file, Code};
