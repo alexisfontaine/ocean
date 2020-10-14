@@ -5,30 +5,35 @@ const Bundler = require('parcel-bundler')
 const chokidar = require('chokidar')
 const project = require('./package')
 
-const isProduction = process.env.NODE_ENV === 'production'
-const output = join(__dirname, 'target', isProduction ? 'release' : 'debug')
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
+const NAME = project.name
+const OUTPUT = join(__dirname, 'target', IS_PRODUCTION ? 'release' : 'debug')
+const PACKAGE = join(OUTPUT, 'package')
+const PUBLIC = join(OUTPUT, 'public')
 
-const command = `wasm-pack build --no-typescript --target web --out-dir ${join(output, 'public')} --out-name ${project.name} ${isProduction ? '-- --features wee_alloc' : '--dev'}`
+const bundler = new Bundler(join(__dirname, 'index.html'), {
+	autoInstall: false,
+	cacheDir: join(OUTPUT, '.cache'),
+	outDir: PUBLIC,
+	scopeHoist: IS_PRODUCTION,
+})
 
-;(async () => {
-	const bundler = new Bundler(join(__dirname, 'index.html'), {
-		cacheDir: join(output, '.cache'),
-		outDir: join(output, 'public'),
-		outFile: 'index.html',
-		publicUrl: '/',
-		watch: !isProduction,
-		minify: isProduction,
-	})
+const build = `PACKAGE_DIR=${PACKAGE} wasm-pack build \
+	--no-typescript \
+	--out-dir ${PACKAGE} \
+	--out-name ${NAME} \
+	--target web \
+	${IS_PRODUCTION ? '-- --features wee_alloc' : '--dev'}`
 
-	bundler.on('buildStart', () => execSync(command, { stdio: 'inherit' }))
+const copy = `cp -r ${join(PACKAGE, `{${NAME}.js,${NAME}_bg.wasm}`)} ${join(__dirname, 'assets/{images,favicon.ico,logo.svg,manifest.webmanifest}')} ${PUBLIC}`
 
-	if (isProduction) {
-		execSync(`rm -rf ${join(output, 'public')}`)
-		bundler.bundle()
+bundler.on('buildStart', () => execSync(build, { stdio: 'inherit' }))
+bundler.on('buildEnd', () => execSync(copy))
 
-		return
-	}
-
+if (IS_PRODUCTION) {
+	execSync(`rm -rf ${PUBLIC}`)
+	bundler.bundle()
+} else {
 	chokidar
 		.watch(['./{sources,components}/**/*.{rs,toml}', './Cargo.toml'])
 		.on('change', async (event, path) => {
@@ -38,5 +43,5 @@ const command = `wasm-pack build --no-typescript --target web --out-dir ${join(o
 			bundler.hmr.broadcast({ type: 'reload' })
 		})
 
-	await bundler.serve(process.env.PORT || 1234)
-})()
+	bundler.serve(process.env.PORT || 1234)
+}

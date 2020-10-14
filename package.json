@@ -12,15 +12,10 @@
 	"devDependencies": {
 		"autoprefixer": "^9.8.6",
 		"chokidar": "^3.4.2",
+		"cssnano-preset-advanced": "^4.0.7",
 		"parcel-bundler": "^1.12.4",
-		"parcel-plugin-static-files-copy": "^2.5.0",
+		"postcss-combine-duplicated-selectors": "^9.4.0",
 		"sass": "^1.26.11"
-	},
-	"staticFiles": {
-		"staticPath": [
-			"./assets"
-		],
-		"watcherGlob": "**"
 	},
 	"browserslist": [
 		"> 1%",

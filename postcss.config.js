@@ -1,5 +1,7 @@
 module.exports = {
 	plugins: {
-		autoprefixer: {}
+		autoprefixer: {},
+		cssnano: { preset: 'advanced' },
+		'postcss-combine-duplicated-selectors': { removeDuplicatedProperties: true },
 	}
 }
