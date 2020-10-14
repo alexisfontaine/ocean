@@ -1,5 +1,5 @@
 [package]
-name = "ocean-macro"
+name = "ocean-macros"
 version = "0.1.0"
 authors = ["Alexis Fontaine <alexis.fontaine@outlook.com>"]
 edition = "2018"

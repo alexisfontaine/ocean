@@ -10,11 +10,11 @@ path = "main.rs"
 
 [features]
 router = []
-code = ["ocean-macro"]
+code = ["ocean-macros"]
 story = ["code"]
 
 [dependencies]
 web-sys = "0.3"
 yew = "0.17"
 yew-router = { version = "0.14", default-features = false, features = ["agent", "web_sys"] }
-ocean-macro = { path = "../macro", optional = true }
+ocean-macros = { path = "../macros", optional = true }

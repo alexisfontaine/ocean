@@ -1,7 +1,7 @@
 #[cfg(feature = "story")]
 mod story;
 
-pub use ocean_macro::{highlight, highlight_file};
+pub use ocean_macros::{highlight, highlight_file};
 
 use web_sys::window;
 use yew::prelude::*;

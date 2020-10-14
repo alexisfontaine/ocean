@@ -18,7 +18,7 @@ yew-router = { version = "0.14", default-features = false, features = ["agent", 
 wee_alloc = { version = "0.4", optional = true }
 
 [workspace]
-members = ["components", "macro"]
+members = ["components", "macros"]
 
 [profile.release]
 codegen-units = 1
