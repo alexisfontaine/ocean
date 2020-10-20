@@ -35,7 +35,7 @@ if (IS_PRODUCTION) {
 	bundler.bundle()
 } else {
 	chokidar
-		.watch(['./{sources,components}/**/*.{rs,toml}', './Cargo.toml'])
+		.watch(['./{components,macros,sources}/**/*.{rs,scss,toml}', './Cargo.toml'])
 		.on('change', async (event, path) => {
 			console.log(`"${path}" changed...`)
 

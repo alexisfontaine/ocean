@@ -1,14 +1,25 @@
-mod kind;
-
 #[cfg(feature = "story")]
 mod story;
 
 
-pub use self::kind::*;
-
 use yew::prelude::*;
 
+use crate::utils::style_file;
 use crate::utils::ne_assign;
+
+
+macro_rules! style {
+	() => {style_file!("title", "components/title/title.scss")}
+}
+
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub enum Kind {
+	Headline,
+	Main,
+	Section,
+	SubSection,
+}
 
 
 #[derive(Clone, Debug, PartialEq, Properties)]
@@ -32,6 +43,25 @@ impl Title {
 	pub const Section: Kind = Kind::Section;
 
 	pub const SubSection: Kind = Kind::SubSection;
+
+
+	pub const fn class (&self) -> &'static str {
+		match self.kind {
+			Kind::Headline => concat!(style!(), "--headline"),
+			Kind::Main => style!(),
+			Kind::Section => concat!(style!(), "--section"),
+			Kind::SubSection => concat!(style!(), "--sub-section"),
+		}
+	}
+
+	pub const fn tag (&self) -> &'static str {
+		match self.kind {
+			Kind::Headline => "h1",
+			Kind::Main => "h1",
+			Kind::Section => "h2",
+			Kind::SubSection => "h3",
+		}
+	}
 }
 
 
@@ -55,7 +85,7 @@ impl Component for Title {
 
 	fn view (&self) -> Html {
 		html! {
-			<@{self.kind.tag()} class=(&self.class, self.kind.class())>
+			<@{self.tag()} class=(&self.class, self.class())>
 				{self.children.clone()}
 			</@>
 		}

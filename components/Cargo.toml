@@ -9,12 +9,12 @@ description = "An experimental design system made for fun with Rust front-end fr
 path = "main.rs"
 
 [features]
+code = ["ocean-macros/code"]
 router = []
-code = ["ocean-macros"]
 story = ["code"]
 
 [dependencies]
 web-sys = "0.3"
 yew = "0.17"
 yew-router = { version = "0.14", default-features = false, features = ["agent", "web_sys"] }
-ocean-macros = { path = "../macros", optional = true }
+ocean-macros = { path = "../macros" }

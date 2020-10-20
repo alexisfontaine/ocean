@@ -9,7 +9,15 @@ description = "An experimental design system made with Rust front-end framework 
 path = "main.rs"
 proc-macro = true
 
+[features]
+code = ["syntect"]
+
 [dependencies]
 quote = "1"
 syn = "1"
-syntect = { version = "4", default-features = false, features = ["assets", "dump-load", "html", "parsing", "regex-fancy"] }
+
+[dependencies.syntect]
+default-features = false
+features = ["assets", "dump-load", "html", "parsing", "regex-fancy"]
+optional = true
+version = "4"

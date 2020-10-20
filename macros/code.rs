@@ -21,7 +21,7 @@ impl Code<'_> {
 		}
 	}
 
-	pub fn highlight (&self) -> TokenStream {
+	pub fn to_token (&self) -> TokenStream {
 		let mut generator = ClassedHTMLGenerator::new_with_class_style(&self.syntax, &*SYNTAX, ClassStyle::Spaced);
 
 		for line in self.source.lines()
