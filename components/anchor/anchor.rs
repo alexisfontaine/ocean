@@ -74,8 +74,7 @@ impl Component for Anchor {
 
 
 pub fn render (to: &str, kind: Kind, mut class: String, handle_click: Option<&Callback<MouseEvent>>, children: Children, is_active: bool, is_disabled: bool, is_loading: bool, open_in_new_context: bool) -> Html {
-	if class.is_empty()
-		{ class.push_str(kind.class()); }
+	class.push_str(kind.class());
 
 	if is_active
 		{ class.push_str(" active"); }

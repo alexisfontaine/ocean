@@ -6,7 +6,12 @@ pub use ocean_macros::{highlight, highlight_file};
 use web_sys::window;
 use yew::prelude::*;
 
-use crate::utils::ne_assign;
+use crate::utils::{ne_assign, style_file};
+
+
+macro_rules! style {
+	() => {style_file!("code", "components/code/code.scss")};
+}
 
 
 #[derive(Clone, Debug, PartialEq, Properties)]
@@ -18,6 +23,15 @@ pub struct Code {
 
 	#[prop_or_default]
 	pub inline: bool,
+}
+
+
+impl Code {
+	pub const fn class (&self) -> &'static str {
+		if self.inline
+			{ concat!(style!(), "--inline") } else
+			{ style!() }
+	}
 }
 
 
@@ -43,9 +57,7 @@ impl Component for Code {
 		let mut class = self.class.clone();
 		let container = window().unwrap().document().unwrap().create_element(if self.inline { "code" } else { "pre" }).unwrap();
 
-		if class.is_empty()
-			{ class.push_str(if self.inline { "code--inline" } else { "code" }) }
-
+		class.push_str(self.class());
 		container.set_class_name(&class);
 		container.set_inner_html(&self.content);
 		Html::VRef(container.into())

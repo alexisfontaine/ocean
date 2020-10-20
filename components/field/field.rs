@@ -10,7 +10,8 @@ use std::cell::Cell;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
-use crate::utils::ne_assign;
+use crate::conditional;
+use crate::utils::{ne_assign, style_file};
 
 
 #[derive(Debug)]
@@ -57,6 +58,8 @@ pub struct Properties {
 
 #[allow(non_upper_case_globals)]
 impl Field {
+	pub const STYLE: &'static str = style_file!("field", "components/field/field.scss");
+
 	pub const Text: Kind = Kind::Text;
 }
 
@@ -102,23 +105,16 @@ impl Component for Field {
 
 	fn view (&self) -> Html {
 		let properties = &self.properties;
-		let mut class = properties.class.clone();
 		let details = &properties.details;
-
-		if class.is_empty()
-			{ class.push_str("field"); }
-
-		if properties.error
-			{ class.push_str(" error"); }
 
 		html! {
 			// `<fieldset>` has a bug on Chrome that prevents it from using `flex` or `grid` layout.
-			<div class=class>
+			<div class=(Self::STYLE, &properties.class, conditional!(properties.error, "error"))>
 				<input autofocus=properties.autofocus disabled=properties.disabled id=&self.identifier oninput=&self.handle_input type=properties.kind.value() ref=self.input.clone() />
 
 				<label for=&self.identifier>{&properties.label}</label>
 
-				{for if details.is_empty() { None } else { Some(html!(<span>{details}</span>)) }}
+				{for conditional!(details.is_empty(), html!(<span>{details}</span>)) }
 			</div>
 		}
 	}

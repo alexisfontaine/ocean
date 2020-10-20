@@ -4,7 +4,7 @@ mod story;
 
 use yew::prelude::*;
 
-use crate::utils::ne_assign;
+use crate::utils::{ne_assign, style_file};
 
 
 #[derive(Clone, Debug, PartialEq, Properties)]
@@ -16,6 +16,11 @@ pub struct List {
 
 	#[prop_or("section".into())]
 	pub tag: String,
+}
+
+
+impl List {
+	pub const STYLE: &'static str = style_file!("list", "components/list/list.scss");
 }
 
 
@@ -39,7 +44,7 @@ impl Component for List {
 
 	fn view (&self) -> Html {
 		html! {
-			<@{self.tag.clone()} class=(&self.class, "list")>
+			<@{self.tag.clone()} class=(&self.class, Self::STYLE)>
 				{self.children.clone()}
 			</@>
 		}

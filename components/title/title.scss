@@ -1,39 +1,41 @@
-.title, [class^='title--'] {
-	margin-top: 0;
-	margin-bottom: var(--padding);
-	font-size: var(--size);
-	font-weight: var(--weight);
-}
-
-%title--main {
-	--size: 5rem;
+%title-main {
 	--weight: 400;
 
 	color: #fff;
 }
 
-.title {
-	@extend %title--main;
-}
 
-.title--headline {
-	@extend %title--main;
+:root {
+	@extend %title-main;
 
-	--size: 6rem;
+	--size: 5rem;
 
-	letter-spacing: -1px;
-}
+	&--headline {
+		@extend %title-main;
 
-.title--section {
-	--size: 3rem;
-	--weight: 400;
+		--size: 6rem;
 
-	color: #a6accd;
-}
+		letter-spacing: -1px;
+	}
 
-.title--sub-section {
-	--size: 2rem;
-	--weight: 700;
+	&--section {
+		--size: 3rem;
+		--weight: 400;
 
-	color: #5e668a;
+		color: #a6accd;
+	}
+
+	&--sub-section {
+		--size: 2rem;
+		--weight: 700;
+
+		color: #5e668a;
+	}
+
+	@at-root [class^=#{str-slice(#{&}--, 2)}], & {
+		margin-top: 0;
+		margin-bottom: var(--padding);
+		font-size: var(--size);
+		font-weight: var(--weight);
+	}
 }

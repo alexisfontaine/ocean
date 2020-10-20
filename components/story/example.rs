@@ -1,6 +1,7 @@
 use yew::prelude::*;
 
 use crate::title::Title;
+use crate::utils::style_file;
 
 
 pub struct Example {
@@ -10,6 +11,9 @@ pub struct Example {
 
 
 impl Example {
+	pub const STYLE: &'static str = style_file!("example", "components/story/example.scss");
+
+
 	pub fn new (content: Vec<Vec<Html>>) -> Self {
 		Self {
 			content,
@@ -26,13 +30,13 @@ impl Example {
 
 	pub fn render (self) -> Html {
 		let content = self.content;
-		let style = format!("grid-template-columns: repeat({}, auto);", content[0].len());
+		let style = format!("--columns: {};", content[0].len());
 
 		html! {
 			<>
 				<Title kind=Title::SubSection>{for self.title}</Title>
 
-				<section class="example" style=style>{for content.into_iter().flatten()}</section>
+				<section class=Self::STYLE style=style>{for content.into_iter().flatten()}</section>
 			</>
 		}
 	}

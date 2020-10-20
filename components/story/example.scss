@@ -1,13 +1,16 @@
-@import '../main';
-@import '../code/code';
-@import '../list/story';
+@use 'list';
 
 
-.example {
+:root {
 	display: grid;
 	grid-gap: var(--padding) var(--margin);
+	grid-template-columns: repeat(var(--columns), auto);
 	justify-content: center;
 	justify-items: center;
 	align-items: flex-start;
 	margin-bottom: var(--margin);
+
+	#{list.$root} {
+		min-width: 32rem;
+	}
 }

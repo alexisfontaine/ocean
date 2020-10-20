@@ -1,4 +1,4 @@
-@use '../common';
+@use 'main';
 
 
 %anchor {
@@ -11,7 +11,8 @@
 	outline: none;
 }
 
-.anchor {
+
+:root {
 	@extend %loading;
 
 	--border-color: var(--color-ghost-hover);
@@ -26,35 +27,35 @@
 	&:active {
 		color: inherit;
 	}
-}
 
-.anchor--inline {
-	--border-color: var(--color-primary);
+	&--inline {
+		--border-color: var(--color-primary);
 
-	box-shadow: inset 0 calc(0px - var(--border)) 0 0 var(--border-color);
-	transition: box-shadow .2s, color .2s;
+		box-shadow: inset 0 calc(0px - var(--border)) 0 0 var(--border-color);
+		transition: box-shadow .2s, color .2s;
 
-	&:hover, &:focus {
-		--border: var(--border-focus);
+		&:hover, &:focus {
+			--border: var(--border-focus);
 
-		color: #fff;
+			color: #fff;
+		}
+
+		&:active {
+			--border-color: var(--color-primary-active);
+
+			color: inherit;
+		}
 	}
 
-	&:active {
-		--border-color: var(--color-primary-active);
+	@at-root [class^=#{str-slice(#{&}--, 2)}], & {
+		@extend %anchor;
 
 		color: inherit;
-	}
-}
 
-.anchor, [class^='anchor--'] {
-	@extend %anchor;
+		&.disabled {
+			--border-color: #0000;
 
-	color: inherit;
-
-	&.disabled {
-		--border-color: #0000;
-
-		color: var(--color-foreground-disabled);
+			color: var(--color-foreground-disabled);
+		}
 	}
 }

@@ -54,10 +54,9 @@ impl Title {
 		}
 	}
 
-	pub const fn tag (&self) -> &'static str {
+	const fn tag (&self) -> &'static str {
 		match self.kind {
-			Kind::Headline => "h1",
-			Kind::Main => "h1",
+			Kind::Headline | Kind::Main => "h1",
 			Kind::Section => "h2",
 			Kind::SubSection => "h3",
 		}

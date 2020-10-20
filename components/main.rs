@@ -13,3 +13,6 @@ pub mod story;
 
 
 pub use components::*;
+
+
+utils::include_style_file!("main", "components/main.scss");

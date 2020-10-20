@@ -1,4 +1,13 @@
-@import '../components/story/story';
+@import '~main';
+
+@import '~action';
+@import '~anchor';
+@import '~code';
+@import '~example';
+@import '~field';
+@import '~list';
+@import '~stack';
+@import '~title';
 
 @import 'hero';
 @import 'icon';
