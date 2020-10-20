@@ -20,7 +20,7 @@ pub struct List {
 
 
 impl List {
-	pub const STYLE: &'static str = style_file!("list", "components/list/list.scss");
+	pub const STYLE: &'static str = style_file!("list", "./list.scss");
 }
 
 

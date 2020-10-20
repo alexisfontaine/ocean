@@ -58,7 +58,7 @@ pub struct Properties {
 
 #[allow(non_upper_case_globals)]
 impl Field {
-	pub const STYLE: &'static str = style_file!("field", "components/field/field.scss");
+	pub const STYLE: &'static str = style_file!("field", "./field.scss");
 
 	pub const Text: Kind = Kind::Text;
 }

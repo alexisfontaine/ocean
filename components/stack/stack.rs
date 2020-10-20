@@ -20,7 +20,7 @@ pub struct Stack {
 
 
 impl Stack {
-	pub const STYLE: &'static str = style_file!("stack", "components/stack/stack.scss");
+	pub const STYLE: &'static str = style_file!("stack", "./stack.scss");
 }
 
 

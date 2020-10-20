@@ -1,4 +1,4 @@
-#![feature(once_cell)]
+#![feature(once_cell, proc_macro_span)]
 
 
 #[cfg(feature = "code")]
@@ -11,6 +11,7 @@ use syn::parse_macro_input;
 
 use proc_macro::TokenStream;
 use std::fs::read_to_string;
+use std::path::PathBuf;
 use syn::parse::Parser;
 use syn::punctuated::Punctuated;
 use syn::{LitStr, Token};
@@ -37,7 +38,7 @@ pub fn highlight (input: TokenStream) -> TokenStream {
 pub fn highlight_file (input: TokenStream) -> TokenStream {
 	let input = parse_macro_input!(input as LitStr);
 
-	Code::to_token(&input.value().into())
+	Code::to_token(&relative_path(&input).into())
 }
 
 #[proc_macro]
@@ -56,7 +57,7 @@ pub fn include_style_file (input: TokenStream) -> TokenStream {
 
 	assert_eq!(input.len(), 2);
 
-	Style::new(input.first().unwrap(), read_to_string(&input.last().unwrap().value()).unwrap()).include();
+	Style::new(input.first().unwrap(), read_to_string(&relative_path(&input.last().unwrap())).unwrap()).include();
 	TokenStream::new()
 }
 
@@ -76,5 +77,14 @@ pub fn style_file (input: TokenStream) -> TokenStream {
 
 	assert_eq!(input.len(), 2);
 
-	Style::new(input.first().unwrap(), read_to_string(&input.last().unwrap().value()).unwrap()).to_token()
+	Style::new(input.first().unwrap(), read_to_string(&relative_path(&input.last().unwrap())).unwrap()).to_token()
+}
+
+
+fn relative_path (input: &LitStr) -> PathBuf {
+	let mut path = input.span().unwrap().source_file().path();
+
+	path.pop();
+	path.push(input.value());
+	path
 }

@@ -2,8 +2,8 @@ use crate::utils::style_file;
 
 
 macro_rules! style {
-	("anchor") => {style_file!("anchor", "components/anchor/anchor.scss")};
-	("action") => {style_file!("action", "components/action/action.scss")};
+	("anchor") => {style_file!("anchor", "./anchor.scss")};
+	("action") => {style_file!("action", "../action/action.scss")};
 }
 
 

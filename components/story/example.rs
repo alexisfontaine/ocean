@@ -11,7 +11,7 @@ pub struct Example {
 
 
 impl Example {
-	pub const STYLE: &'static str = style_file!("example", "components/story/example.scss");
+	pub const STYLE: &'static str = style_file!("example", "./example.scss");
 
 
 	pub fn new (content: Vec<Vec<Html>>) -> Self {

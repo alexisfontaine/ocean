@@ -19,7 +19,7 @@ impl Story for Code {
 			})),
 
 			Example::from(("Block", html! {
-				<Code content=highlight_file!("components/code/story.rs") />
+				<Code content=highlight_file!("./story.rs") />
 			})),
 		]
 	}

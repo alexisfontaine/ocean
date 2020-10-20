@@ -10,7 +10,7 @@ use crate::utils::{ne_assign, style_file};
 
 
 macro_rules! style {
-	() => {style_file!("code", "components/code/code.scss")};
+	() => {style_file!("code", "./code.scss")};
 }
 
 
