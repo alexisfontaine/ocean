@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 use quote::ToTokens;
-use std::env::var;
+use std::env::{var, VarError};
 use std::fs::OpenOptions;
 use std::io::{Read, Seek, SeekFrom, Write};
 use std::path::Path;
@@ -33,15 +33,21 @@ impl<'a> Style<'a> {
 
 
 fn include (name: &str, style: &[u8]) {
-	let mut file = OpenOptions::new()
-		.create(true)
-		.read(true)
-		.write(true)
-		.open(Path::new(&var("PACKAGE_DIR").unwrap()).join(name).with_extension("scss")).unwrap();
+	match var("PACKAGE_DIR") {
+		Err(VarError::NotPresent) => {}
+		Err(error) => panic!(error),
+		Ok(directory) => {
+			let mut file = OpenOptions::new()
+				.create(true)
+				.read(true)
+				.write(true)
+				.open(Path::new(&directory).join(name).with_extension("scss")).unwrap();
 
-	if !Read::by_ref(&mut file).bytes().filter_map(Result::ok).eq(style.iter().copied()) {
-		file.seek(SeekFrom::Start(0)).unwrap();
-		file.set_len(style.len() as _).unwrap();
-		file.write_all(style).unwrap();
+			if !Read::by_ref(&mut file).bytes().filter_map(Result::ok).eq(style.iter().copied()) {
+				file.seek(SeekFrom::Start(0)).unwrap();
+				file.set_len(style.len() as _).unwrap();
+				file.write_all(style).unwrap();
+			}
+		}
 	}
 }
