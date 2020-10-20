@@ -1,6 +1,6 @@
 [package]
 name = "ocean-macros"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Alexis Fontaine <alexis.fontaine@outlook.com>"]
 edition = "2018"
 description = "An experimental design system made with Rust front-end framework Yew"
