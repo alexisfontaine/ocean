@@ -18,7 +18,7 @@ const bundler = new Bundler(join(__dirname, 'index.html'), {
 	scopeHoist: IS_PRODUCTION,
 })
 
-const build = `PACKAGE_DIR=${PACKAGE} wasm-pack build \
+const build = `PACKAGE_DIR=${PACKAGE} wasm-pack --log-level error build \
 	--no-typescript \
 	--out-dir ${PACKAGE} \
 	--out-name ${NAME} \
@@ -27,7 +27,7 @@ const build = `PACKAGE_DIR=${PACKAGE} wasm-pack build \
 
 const copy = `cp -r ${join(PACKAGE, `{${NAME}.js,${NAME}_bg.wasm}`)} ${join(__dirname, 'assets/{images,favicon.ico,logo.svg,manifest.webmanifest}')} ${PUBLIC}`
 
-bundler.on('buildStart', () => execSync(build, { stdio: 'inherit' }))
+bundler.on('buildStart', () => execSync(build))
 bundler.on('buildEnd', () => execSync(copy))
 
 if (IS_PRODUCTION) {
