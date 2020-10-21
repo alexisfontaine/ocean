@@ -98,6 +98,9 @@ impl Component for Action {
 		match self.kind {
 			kind @ Kind::Anchor(_) => render("#", kind, class, Some(handle_click), children, false, self.disabled, self.loading, false),
 			kind => {
+				if !class.is_empty()
+					{ class.push(' '); }
+
 				class.push_str(kind.class());
 
 				if self.disabled

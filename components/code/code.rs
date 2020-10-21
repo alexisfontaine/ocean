@@ -57,6 +57,9 @@ impl Component for Code {
 		let mut class = self.class.clone();
 		let container = window().unwrap().document().unwrap().create_element(if self.inline { "code" } else { "pre" }).unwrap();
 
+		if !class.is_empty()
+			{ class.push(' '); }
+
 		class.push_str(self.class());
 		container.set_class_name(&class);
 		container.set_inner_html(&self.content);
