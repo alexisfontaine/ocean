@@ -1,6 +1,6 @@
 [package]
 name = "ocean"
-version = "0.1.0"
+version = "0.1.2"
 authors = ["Alexis Fontaine <alexis.fontaine@outlook.com>"]
 edition = "2018"
 description = "An experimental design system made for fun with Rust front-end framework Yew"
