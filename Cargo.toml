@@ -25,3 +25,4 @@ members = ["components", "macros"]
 [profile.release]
 codegen-units = 1
 lto = true
+opt-level = "s"
